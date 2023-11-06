@@ -17,6 +17,9 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule, {
     logger: console,
+    cors: {
+      origin: 'https://loadout.tf',
+    },
   })
   const config = new DocumentBuilder()
     .setTitle('Pricetagged.tf')
