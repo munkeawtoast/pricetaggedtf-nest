@@ -73,9 +73,7 @@ export class AutobotTFPricingsService implements PricingsProviderService {
   async findAll() {
     const cached = await this.retrieveFromCache()
     if (cached) {
-      return {
-        ...cached,
-      }
+      return cached
     }
 
     const { success, items } = await this.getPricings()
