@@ -13,6 +13,7 @@ import { Cache } from 'cache-manager'
 import { PricingsCache } from '../pricings/models/v1/pricings-cache.data'
 import { PricingData } from '../pricings/models/v1/pricings.data'
 import { TF2SchemaService } from '../tf2-schema/tf2-schema.service'
+import sku from '@tf2autobot/tf2-sku'
 
 @Injectable()
 export class AutobotTFPricingsService implements PricingsProviderService {
@@ -62,10 +63,14 @@ export class AutobotTFPricingsService implements PricingsProviderService {
           defindex: Number(defIndex),
           quality: 6,
         })
-        return items.flatMap((item) => ({
-          baseName,
-          ...item,
-        }))
+        return items.flatMap((item) => {
+          const image = this.tf2SchemaService.getImage(sku.fromString(item.sku))
+          return {
+            baseName,
+            image,
+            ...item,
+          }
+        })
       }
     )
   }

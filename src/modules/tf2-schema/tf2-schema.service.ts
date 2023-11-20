@@ -29,4 +29,8 @@ export class TF2SchemaService implements OnModuleInit {
     this.logger.verbose('getName called')
     return this.schemaManager.schema.getName(item)
   }
+
+  getImage(item: Item) {
+    return this.schemaManager.schema.getItemByDefindex(item.defindex).image_url
+  }
 }

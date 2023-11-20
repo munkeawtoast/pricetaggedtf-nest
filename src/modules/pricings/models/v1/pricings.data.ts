@@ -11,7 +11,6 @@ export class Currencies {
 export class PricingData {
   @ApiProperty()
   sku: string
-
   @ApiProperty()
   name: string
   @ApiProperty()
@@ -24,6 +23,8 @@ export class PricingData {
   buy: Currencies
   @ApiProperty()
   sell: Currencies
+  @ApiProperty()
+  image: string
 }
 
 export const examplePricingData: PricingData[] = [
