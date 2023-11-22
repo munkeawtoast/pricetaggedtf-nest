@@ -7,7 +7,7 @@ import { ItemModel } from './models/item.model'
 export class TF2SchemaService implements OnModuleInit {
   private readonly logger = new Logger(TF2SchemaService.name)
   private readonly schemaManager: SchemaManager
-  constructor(private readonly configService: ConfigService) {
+  constructor(private readonly configService: ConfigService<GlobalEnv>) {
     this.schemaManager = new SchemaManager({
       apiKey: this.configService.getOrThrow('STEAM_WEB_API_KEY'),
       updateTime: 5 * 60 * 1000,
