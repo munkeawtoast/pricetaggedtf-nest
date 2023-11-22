@@ -5,23 +5,27 @@ import { ItemModel } from './models/item.model'
 
 @Injectable()
 export class TF2SchemaService implements OnModuleInit {
-  private logger: Logger
-  private schemaManager: SchemaManager
-  constructor(private readonly configService: ConfigService) {}
-
-  async onModuleInit() {
-    this.logger = new Logger(TF2SchemaService.name)
+  private readonly logger = new Logger(TF2SchemaService.name)
+  private readonly schemaManager: SchemaManager
+  constructor(private readonly configService: ConfigService) {
     this.schemaManager = new SchemaManager({
       apiKey: this.configService.getOrThrow('STEAM_WEB_API_KEY'),
       updateTime: 5 * 60 * 1000,
     })
-    this.schemaManager.init((err) => {
-      this.logger.verbose('init called')
-      if (err) {
-        throw err
-      }
-      this.schemaManager.on('ready', () => {
-        this.logger.log('SchemaManager ready')
+  }
+
+  async onModuleInit() {
+    return new Promise((resolve, reject) => {
+      this.schemaManager.init((err) => {
+        this.logger.verbose('init called')
+        if (err) {
+          reject(err)
+          throw err
+        }
+        this.schemaManager.on('ready', () => {
+          this.logger.verbose('ready called')
+          resolve(true)
+        })
       })
     })
   }
