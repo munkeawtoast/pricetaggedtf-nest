@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { AutobotTFPricingsService } from './autobot-tfpricings.service'
 import { HttpModule } from '@nestjs/axios'
-import { AutobotTFPricingsHttpConfigService } from './autobot-tfpricings-http-config.service'
+import { AutobotTFPricingsHttpConfigService } from './config/autobot-tfpricings-http-config.service'
 import { CacheModule } from '@nestjs/cache-manager'
-import { PricingsCacheConfigService } from '../pricings/pricings-cache-config.service'
-import { TF2SchemaModule } from '../tf2-schema/tf2-schema.module'
+import { PricingsCacheConfigService } from '../../config/pricings-cache-config.service'
+import { TF2SchemaModule } from '../../../tf2-schema/tf2-schema.module'
 
 describe('AutobotTFService', () => {
   let service: AutobotTFPricingsService

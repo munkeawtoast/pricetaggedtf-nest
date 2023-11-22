@@ -1,4 +1,5 @@
 import { HttpService } from '@nestjs/axios'
+import * as ld from 'lodash'
 import {
   Inject,
   Injectable,
@@ -7,16 +8,16 @@ import {
 } from '@nestjs/common'
 import { firstValueFrom } from 'rxjs'
 import { AutobotTFItemEntry, AutobotTFPricesResponse } from './types'
-import { PricingsProviderService } from '../pricings/pricings-provider-interface.service'
+import { IPricingsProviderService } from '../../interfaces/pricings-provider.service.interface'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
 import { Cache } from 'cache-manager'
-import { PricingsCache } from '../pricings/models/v1/pricings-cache.data'
-import { PricingData } from '../pricings/models/v1/pricings.data'
-import { TF2SchemaService } from '../tf2-schema/tf2-schema.service'
+import { PricingsCache } from '../../models/v1/pricings-cache.data'
+import { PricingData } from '../../models/v1/pricings.data'
+import { TF2SchemaService } from '../../../tf2-schema/tf2-schema.service'
 import sku from '@tf2autobot/tf2-sku'
 
 @Injectable()
-export class AutobotTFPricingsService implements PricingsProviderService {
+export class AutobotTFPricingsService implements IPricingsProviderService {
   private readonly logger = new Logger(AutobotTFPricingsService.name)
   constructor(
     private readonly httpService: HttpService,
@@ -59,10 +60,13 @@ export class AutobotTFPricingsService implements PricingsProviderService {
 
     return Object.entries(itemFilteredByDefindex).flatMap<PricingData>(
       ([defIndex, items]) => {
-        const baseName = this.tf2SchemaService.getName({
-          defindex: Number(defIndex),
-          quality: 6,
-        })
+        const baseName = ld.trimStart(
+          this.tf2SchemaService.getName({
+            defindex: Number(defIndex),
+            quality: 6,
+          }),
+          'The '
+        )
         return items.flatMap((item) => {
           const image = this.tf2SchemaService.getImage(sku.fromString(item.sku))
           return {
@@ -88,14 +92,11 @@ export class AutobotTFPricingsService implements PricingsProviderService {
       )
     }
 
-    const timestamp = Date.now()
     await this.setCache({
       pricings: this.transformPricings(items),
-      timestamp,
     })
     return {
       pricings: this.transformPricings(items),
-      timestamp,
     }
   }
 
@@ -106,10 +107,8 @@ export class AutobotTFPricingsService implements PricingsProviderService {
       return
     }
 
-    const timestamp = Date.now()
     await this.setCache({
       pricings: this.transformPricings(items),
-      timestamp,
     })
   }
 }

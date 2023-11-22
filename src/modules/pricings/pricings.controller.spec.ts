@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { PricingsController } from './pricings.controller'
-import { AutobotTFPricingsModule } from '../autobot-tfpricings/autobot-tfpricings.module'
-import { PricingsSource } from './enums/source.enum'
+import { AutobotTFPricingsModule } from './providers/autobot-tfpricings/autobot-tfpricings.module'
 import { ConfigModule } from '@nestjs/config'
+import { PricingsSource } from './dto/enums'
 
 describe('PricingsController', () => {
   let controller: PricingsController

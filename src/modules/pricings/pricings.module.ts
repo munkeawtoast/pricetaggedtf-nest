@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common'
 import { PricingsController } from './pricings.controller'
-import { AutobotTFPricingsModule } from '../autobot-tfpricings/autobot-tfpricings.module'
+import { AutobotTFPricingsModule } from './providers/autobot-tfpricings/autobot-tfpricings.module'
 import { ThrottlerModule } from '@nestjs/throttler'
+import { PricingsService } from './pricings.service'
+import { TF2SchemaModule } from '../tf2-schema/tf2-schema.module'
 
 @Module({
-  controllers: [PricingsController],
   imports: [
+    TF2SchemaModule,
     ThrottlerModule.forRoot([
       {
         name: 'short',
@@ -25,5 +27,7 @@ import { ThrottlerModule } from '@nestjs/throttler'
     ]),
     AutobotTFPricingsModule,
   ],
+  controllers: [PricingsController],
+  providers: [PricingsService],
 })
 export class PricingsModule {}

@@ -15,8 +15,7 @@ import { TF2SchemaModule } from './modules/tf2-schema/tf2-schema.module'
           .valid('development', 'production', 'test')
           .default('development'),
         PORT: Joi.number().default(3000),
-        DATABASE_URL: Joi.string().uri().required(),
-        DATABASE_AUTH_TOKEN: Joi.string().required(),
+        // DATABASE_URL: Joi.string().uri().required(), DATABASE_AUTH_TOKEN: Joi.string().required(),
         BACKPACK_TF_API_KEY: Joi.string().required(),
         BACKPACK_TF_BASE_URL: Joi.string()
           .uri()
@@ -24,6 +23,7 @@ import { TF2SchemaModule } from './modules/tf2-schema/tf2-schema.module'
         USER_AGENT: Joi.string().default(
           'https://pricetagged-tf.munkeawtoast.com'
         ),
+        STEAM_WEB_API_KEY: Joi.string().required(),
       }),
     }),
     RavenModule,

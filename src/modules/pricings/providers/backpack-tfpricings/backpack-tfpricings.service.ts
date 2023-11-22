@@ -10,11 +10,11 @@ import {
 import { HttpService } from '@nestjs/axios'
 import { firstValueFrom } from 'rxjs'
 import { PricingData } from 'src/modules/pricings/models/v1/pricings.data'
-import { PricingsProviderService } from '../pricings/pricings-provider-interface.service'
-import { PricingsServiceModel } from '../pricings/models/v1/pricings.model'
+import { IPricingsProviderService } from '../../interfaces/pricings-provider.service.interface'
+import { PricingsServiceModel } from '../pricings/pricings.service-model'
 
 @Injectable()
-export class BackpackTFPricingsService implements PricingsProviderService {
+export class BackpackTFPricingsService implements IPricingsProviderService {
   constructor(private readonly httpService: HttpService) {}
 
   private itemsToPrices() // backpackTfItems: BackpacktfV4PricesSuccessResponse['response']['items'],
@@ -69,6 +69,7 @@ export class BackpackTFPricingsService implements PricingsProviderService {
     return response
   }
 
+  // TODO: Implement backpack.tf pricings
   async findAll(): Promise<PricingsServiceModel> {
     throw new NotImplementedException()
     return {

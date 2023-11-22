@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { PricingData, examplePricingData } from '../models/v1/pricings.data'
+import {
+  PricingData,
+  examplePricingData,
+} from '../../../models/v1/pricings.data'
 
 export class PricingsResponseDTO {
   @ApiProperty()

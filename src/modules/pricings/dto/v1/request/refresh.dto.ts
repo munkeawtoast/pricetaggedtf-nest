@@ -1,7 +1,7 @@
 import { IsEnum } from 'class-validator'
-import { PricingsSource } from '../enums/source.enum'
+import { PricingsSource } from '../../enums'
 
-export class RequestRefreshDTO {
+export class RefreshRequestDTO {
   @IsEnum(PricingsSource)
   source: PricingsSource
 }

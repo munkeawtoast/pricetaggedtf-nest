@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
-import { PricingsResponseDTO } from '../../dto/pricings.dto'
+import { PricingsResponseDTO } from '../../dto/v1/response/pricings.dto'
 
 export class Currencies {
   @ApiProperty()
@@ -42,6 +42,7 @@ export const examplePricingData: PricingData[] = [
       metal: 9.33,
     },
     baseName: 'Kukri',
+    image: 'https://example.com/image.png',
   },
   {
     sku: '3;6',
@@ -57,6 +58,7 @@ export const examplePricingData: PricingData[] = [
       metal: 0.77,
     },
     baseName: 'Kukri',
+    image: 'https://example.com/image.png',
   },
   {
     sku: '4;11',
@@ -72,6 +74,7 @@ export const examplePricingData: PricingData[] = [
       keys: 0,
       metal: 19.88,
     },
+    image: 'https://example.com/image.png',
   },
   {
     sku: '7;11',
@@ -87,6 +90,7 @@ export const examplePricingData: PricingData[] = [
       keys: 1,
       metal: 7,
     },
+    image: 'https://example.com/image.png',
   },
   {
     sku: '9;11',
@@ -102,6 +106,7 @@ export const examplePricingData: PricingData[] = [
       metal: 3.33,
     },
     baseName: 'Shotgun',
+    image: 'https://example.com/image.png',
   },
   {
     sku: '9;6',
@@ -117,6 +122,7 @@ export const examplePricingData: PricingData[] = [
       metal: 1.33,
     },
     baseName: 'Shotgun',
+    image: 'https://example.com/image.png',
   },
 ]
 
