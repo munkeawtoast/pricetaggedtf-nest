@@ -2,6 +2,7 @@ import SchemaManager from '@tf2autobot/tf2-schema'
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { ItemModel } from './models/item.model'
+import { GlobalEnv } from '../app-config/interfaces/global-env.interface'
 
 @Injectable()
 export class TF2SchemaService implements OnModuleInit {
@@ -22,10 +23,7 @@ export class TF2SchemaService implements OnModuleInit {
           reject(err)
           throw err
         }
-        this.schemaManager.on('ready', () => {
-          this.logger.verbose('ready called')
-          resolve(true)
-        })
+        resolve(true)
       })
     })
   }

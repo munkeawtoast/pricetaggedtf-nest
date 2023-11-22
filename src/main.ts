@@ -16,7 +16,6 @@ async function bootstrap() {
   })
 
   const app = await NestFactory.create(AppModule, {
-    logger: console,
     cors: {
       origin: 'https://loadout.tf',
     },
