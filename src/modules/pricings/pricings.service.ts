@@ -17,43 +17,47 @@ export class PricingsService implements IPricingsService {
   constructor(private readonly tf2SchemaService: TF2SchemaService) {}
 
   async group(data: PricingData[]): Promise<GroupedPricingData[]> {
-    return data.reduce<GroupedPricingData[]>((accumulated, item) => {
-      function pushNewItem(group: GroupedPricingData, item: PricingData) {
-        const { quality } = Tf2Sku.fromString(item.sku)
-        group.groups[quality].push({
-          buy: item.buy,
-          name: item.name,
-          sku: item.sku,
-          source: item.source,
-          time: item.time,
-        } satisfies GroupedPricingDataPricingEntry)
-      }
+    const groupedData = data.reduce<GroupedPricingData[]>(
+      (accumulated, item) => {
+        function pushNewItem(group: GroupedPricingData, item: PricingData) {
+          const { quality } = Tf2Sku.fromString(item.sku)
+          group.groups[quality].push({
+            buy: item.buy,
+            name: item.name,
+            sku: item.sku,
+            source: item.source,
+            time: item.time,
+          } satisfies GroupedPricingDataPricingEntry)
+        }
 
-      const sku = Tf2Sku.fromString(item.sku)
-      const itGroup = accumulated.find((p) => p.defindex)
-      if (!itGroup) {
-        const newGroup = structuredClone<GroupedPricingData>({
-          defindex: sku.defindex,
-          name: this.tf2SchemaService.getBaseName(sku),
-          image: this.tf2SchemaService.getImage(sku),
-          groups: {
-            '0': [],
-            '1': [],
-            '3': [],
-            '5': [],
-            '6': [],
-            '9': [],
-            '11': [],
-            '13': [],
-            '14': [],
-            '15': [],
-          },
-        })
-        pushNewItem(newGroup, item)
-      } else {
+        const sku = Tf2Sku.fromString(item.sku)
+        let itGroup = accumulated.find((p) => p.defindex === sku.defindex)
+        if (!itGroup) {
+          itGroup = structuredClone<GroupedPricingData>({
+            defindex: sku.defindex,
+            name: this.tf2SchemaService.getBaseName(sku),
+            image: this.tf2SchemaService.getImage(sku),
+            groups: {
+              '0': [],
+              '1': [],
+              '3': [],
+              '5': [],
+              '6': [],
+              '9': [],
+              '11': [],
+              '13': [],
+              '14': [],
+              '15': [],
+            },
+          })
+          accumulated.push(itGroup)
+        }
         pushNewItem(itGroup, item)
-      }
-      return accumulated
-    }, [])
+
+        return accumulated
+      },
+      []
+    )
+    return groupedData
   }
 }

@@ -4,6 +4,7 @@ import {
   Get,
   Inject,
   Logger,
+  NotImplementedException,
   Query,
 } from '@nestjs/common'
 import { IPricingsProviderService } from './interfaces/pricings-provider.service.interface'
@@ -86,10 +87,15 @@ export class PricingsController implements IPricingsController {
     const { pricings } = await provider.findAll()
 
     const groupedData = await this.pricingsService.group(pricings)
+    groupedData.sort((a, b) => a.defindex - b.defindex)
     return {
       pricings: groupedData,
       success: true,
       timestamp: Date.now(),
     } satisfies GroupedPricingsResponseDTO
+  }
+
+  async refresh(_query: RefreshRequestDTO): Promise<void> {
+    throw new NotImplementedException()
   }
 }

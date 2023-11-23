@@ -11,7 +11,6 @@ import { HttpService } from '@nestjs/axios'
 import { firstValueFrom } from 'rxjs'
 import { PricingData } from 'src/modules/pricings/models/v1/pricings.data'
 import { IPricingsProviderService } from '../../interfaces/pricings-provider.service.interface'
-import { PricingsServiceModel } from '../pricings/pricings.service-model'
 
 @Injectable()
 export class BackpackTFPricingsService implements IPricingsProviderService {
@@ -70,18 +69,8 @@ export class BackpackTFPricingsService implements IPricingsProviderService {
   }
 
   // TODO: Implement backpack.tf pricings
-  async findAll(): Promise<PricingsServiceModel> {
+  findAll(): Promise<{ pricings: PricingData[] }> {
     throw new NotImplementedException()
-    return {
-      pricings: [],
-      timestamp: 0,
-    }
-    // try {
-    //   const { items: rawItems } = await this.findAllRawInternal()
-    //   return this.itemsToPrices(rawItems, { fetchTime: })
-    // } catch (error) {
-    //   throw new Error(`Fetching Backpack.tf Error: ${error.message}`)
-    // }
   }
 
   async refresh(): Promise<void> {
