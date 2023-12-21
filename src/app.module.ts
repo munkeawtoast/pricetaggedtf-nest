@@ -7,7 +7,6 @@ import { TF2SchemaModule } from './modules/tf2-schema/tf2-schema.module'
 
 @Module({
   imports: [AppConfigModule, RavenModule, TF2SchemaModule, PricingsModule],
-  exports: [TF2SchemaModule],
   providers: [
     {
       provide: APP_INTERCEPTOR,

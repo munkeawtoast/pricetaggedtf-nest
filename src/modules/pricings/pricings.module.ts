@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common'
-import { PricingsController } from './pricings.controller'
-import { AutobotTFPricingsModule } from './providers/autobot-tfpricings/autobot-tfpricings.module'
 import { ThrottlerModule } from '@nestjs/throttler'
-import { PricingsService } from './pricings.service'
 import { TF2SchemaModule } from '../tf2-schema/tf2-schema.module'
+import { PricingsController } from './pricings.controller'
+import { PricingsService } from './pricings.service'
+import { AutobotTFPricingsModule } from './providers/autobot-tfpricings/autobot-tfpricings.module'
 
 @Module({
   imports: [

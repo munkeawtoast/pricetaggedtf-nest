@@ -14,6 +14,59 @@ export class GroupedPricingDataPricingEntry {
   buy: Currencies
 }
 
+export class GroupedPricingDataPricingGroupedByQuality {
+  @ApiProperty({
+    type: GroupedPricingDataPricingEntry,
+    isArray: true,
+  })
+  '0': Array<GroupedPricingDataPricingEntry>
+  @ApiProperty({
+    type: GroupedPricingDataPricingEntry,
+    isArray: true,
+  })
+  '1': Array<GroupedPricingDataPricingEntry>
+  @ApiProperty({
+    type: GroupedPricingDataPricingEntry,
+    isArray: true,
+  })
+  '3': Array<GroupedPricingDataPricingEntry>
+  @ApiProperty({
+    type: GroupedPricingDataPricingEntry,
+    isArray: true,
+  })
+  '5': Array<GroupedPricingDataPricingEntry>
+  @ApiProperty({
+    type: GroupedPricingDataPricingEntry,
+    isArray: true,
+  })
+  '6': Array<GroupedPricingDataPricingEntry>
+  @ApiProperty({
+    type: GroupedPricingDataPricingEntry,
+    isArray: true,
+  })
+  '9': Array<GroupedPricingDataPricingEntry>
+  @ApiProperty({
+    type: GroupedPricingDataPricingEntry,
+    isArray: true,
+  })
+  '11': Array<GroupedPricingDataPricingEntry>
+  @ApiProperty({
+    type: GroupedPricingDataPricingEntry,
+    isArray: true,
+  })
+  '13': Array<GroupedPricingDataPricingEntry>
+  @ApiProperty({
+    type: GroupedPricingDataPricingEntry,
+    isArray: true,
+  })
+  '14': Array<GroupedPricingDataPricingEntry>
+  @ApiProperty({
+    type: GroupedPricingDataPricingEntry,
+    isArray: true,
+  })
+  '15': Array<GroupedPricingDataPricingEntry>
+}
+
 export class GroupedPricingData {
   @ApiProperty({
     description: 'The defindex of the item',
@@ -32,6 +85,7 @@ export class GroupedPricingData {
 
   @ApiProperty({
     description: 'Items grouped by quality index',
+    type: GroupedPricingDataPricingGroupedByQuality,
   })
   groups: {
     '0': Array<GroupedPricingDataPricingEntry>
